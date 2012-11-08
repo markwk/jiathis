@@ -109,13 +109,6 @@ function jiathis_block_admin_settings() {
 	    '#description' => t('These are settings for the block. To use the block, go to the <a href="@blocks">blocks</a> page to enable and configure the <em>JiaThis Share Button</em> block.', array('@blocks' => url('admin/structure/block'))),
 	  );
 
-	  $form['display']['jiathis_appkey'] = array(
-	    '#type' => 'textfield',
-	    '#title' => t('Sina JiaThis App Key'),
-	    '#maxlength' => 256,
-	    '#default_value' => variable_get('jiathis_appkey', ''),
-	    '#description' => t('You can get Sina JiaThis App Key at <a href="http://open.sina.com">Open Sina</a>.'),
-	  );
 	  $available_sizes = array(
 	  	'4'	=> t('Tiny'),
 	    '3' => t('Small'),

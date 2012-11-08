@@ -12,7 +12,7 @@
  */
 function jiathis_page_admin_settings() {
 	$script = '';
-	
+
   $locations = array();
   $entity_info = entity_get_info('node');
   $view_modes = $entity_info['view modes'];
@@ -25,7 +25,7 @@ function jiathis_page_admin_settings() {
 	    '#title' => t('Display Settings'),
 	    '#description' => t('These are settings for nodes: the button will be created dynamically for each node using its URL. <br />On the othesr hand, if you only need a block with a fixed URL like your homepage, go to the <a href="@blocks">blocks</a> page to enable and configure the <em>JiaThis Share Button</em> block.', array('@blocks' => url('admin/build/block'))),
 	  );
-	
+
 	$form['display']['jiathis_node_types'] = array(
 	    '#type' => 'checkboxes',
 	    '#title' => t('Display the button on these content types:'),
@@ -47,33 +47,35 @@ function jiathis_page_admin_settings() {
 	     '#default_value' => variable_get('jiathis_weight', '-10'),
 	     '#description' => t('Heavier items will sink. The default weight -10 will show the button at the top of the node content.'),
 	  );
-
 	  $available_sizes = array(
+	  	'4'	=> t('Tiny'),
 	    '3' => t('Small'),
 	    '2' => t('Medium'),
 	    '1' => t('Large'),
 	  );
-	  $available_icons = array(
-	    '3' => t('Buttons'),
-	    '0' => t('Icon'),
+	  $available_styles = array(
+	    '0' => t('Standard'),
+	    '1' => t('Mini'),
 	  );
 	  $default = array(
-		'icontype' => '0',
+			'iconstyle' => 0,
 	    'count' => 0,
 	    'size' => 1,  // standard
 	    'css' => 'margin: 0 1em 1em 1em;float:right',
 	  );
+
 	  $button_settings = variable_get('jiathis_button_settings', $default);
+
 	  $form['jiathis_button_settings'] = array(
 	    '#type' => 'fieldset',
 	    '#title' => t('Button Settings'),
 	    '#tree' => TRUE, // All the options in this fieldset will be grouped in 1 single variable.
 	  );
-	  $form['jiathis_button_settings']['icontype'] = array(
+	  $form['jiathis_button_settings']['iconstyle'] = array(
 	    '#type' => 'radios',
-	    '#title' => t('Icon or Button Display?'),
-	    '#options' => $available_icons,
-	    '#default_value' => $button_settings['icontype'],
+	    '#title' => t('Style'),
+	    '#options' => $available_styles,
+	    '#default_value' => $button_settings['iconstyle'],
 		  );
 	  $form['jiathis_button_settings']['count'] = array(
 	    '#type' => 'radios',
@@ -93,7 +95,7 @@ function jiathis_page_admin_settings() {
 	    '#maxlength' => 256,
 	    '#default_value' => $button_settings['css'],
 	    '#description' => t('To help with the layout and placement of the button, it will be rendered by default inside a wrapper: <br />	&lt;div class="wb_sharebutton-wrapper"&gt;	&lt;/div&gt;<br/>You can enter CSS rules to style this wrapper. By default <em>margin: 0 1em 1em 1em;float:right</em><br />To disable totally the wrapper, input the word <em>nowrapper</em>'),
-	  );	
+	  );
 	  return system_settings_form($form);
 }
 
@@ -115,16 +117,19 @@ function jiathis_block_admin_settings() {
 	    '#description' => t('You can get Sina JiaThis App Key at <a href="http://open.sina.com">Open Sina</a>.'),
 	  );
 	  $available_sizes = array(
+	  	'4'	=> t('Tiny'),
 	    '3' => t('Small'),
 	    '2' => t('Medium'),
 	    '1' => t('Large'),
+
 	  );
-	  $available_icons = array(
-	    '3' => t('Button'),
-	    '0' => t('Icon'),
+	  $available_styles = array(
+	    '0' => t('Standard'),
+	    '1' => t('Mini'),
 	  );
+
 	  $default = array(
-		'icontype_block' => '0',
+			'iconstyle_block' => 0,
 	    'count_block' => 0,
 	    'size_block' => 1,  // standard
 	    'css_block' => 'margin: 0 1em 1em 1em;float:right',
@@ -137,11 +142,11 @@ function jiathis_block_admin_settings() {
 	    '#title' => t('Button Settings'),
 	    '#tree' => TRUE, // All the options in this fieldset will be grouped in 1 single variable.
 	  );
-	  $form['jiathis_block_button_settings']['icontype_block'] = array(
+	  $form['jiathis_block_button_settings']['iconstyle_block'] = array(
 	    '#type' => 'radios',
-	    '#title' => t('Icon or Button Display?'),
-	    '#options' => $available_icons,
-	    '#default_value' => $button_settings['icontype_block'],
+	    '#title' => t('Style'),
+	    '#options' => $available_styles,
+	    '#default_value' => $button_settings['iconstyle_block'],
 		  );
 	  $form['jiathis_block_button_settings']['count_block'] = array(
 	    '#type' => 'radios',
@@ -161,7 +166,7 @@ function jiathis_block_admin_settings() {
 	    '#maxlength' => 256,
 	    '#default_value' => $button_settings['css_block'],
 	    '#description' => t('To help with the layout and placement of the button, it will be rendered by default inside a wrapper: <br />	&lt;div class="wb_sharebutton-wrapper"&gt;	&lt;/div&gt;<br/>You can enter CSS rules to style this wrapper. By default <em>margin: 0 1em 1em 1em;float:right</em><br />To disable totally the wrapper, input the word <em>nowrapper</em>'),
-	  );	
+	  );
 	  return system_settings_form($form);
 }
 
@@ -195,4 +200,4 @@ function jiathis_trim($list, $delimiter) {
 	  }
 	return $list;
 }
-	
+

@@ -24,6 +24,6 @@ function jiathis_uninstall() {
   variable_del('jiathis_weight');
   variable_del('jiathis_appkey');
   variable_del('jiathis_showonteasers');
-	variable_del('jiathis_block_button_settings');
+  variable_del('jiathis_block_button_settings');
   variable_del('jiathis_button_settings');
 }

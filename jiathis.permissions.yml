@@ -1,0 +1,4 @@
+administer jiathis:
+  description: 'Change settings for the JiaThis module.'
+  title: 'Administer JiaThis'
+  restrict access: TRUE

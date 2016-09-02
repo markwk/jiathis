@@ -1,4 +1,5 @@
-administer jiathis:
-  description: 'Change settings for the JiaThis module.'
-  title: 'Administer JiaThis'
-  restrict access: TRUE
+administer JiaThis sharebutton:
+  title: 'Administer JiaThis Sharebutton'
+
+view JiaThis sharebutton:
+  title: 'View JiaThis Sharebutton'

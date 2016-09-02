@@ -9,9 +9,9 @@
  * Implements hook_enable().
  */
 function jiathis_enable() {
-  $node_types = variable_get('jiathis_node_types', array());
+  $node_types = \Drupal::config('jiathis.page')->get('node_types');
   if (empty($node_types)) {
-    drupal_set_message(t('To finish enabling JiaThis Share Button in your nodes, visit the <a href="@settings">settings</a> page. And remember to check the <a href="@perm">permissions</a> to view the button.', array('@settings' => url('admin/config/services/jiathis'), '@perm' => url('admin/people/permissions', array('fragment' => 'module-jiathis')))));
+    drupal_set_message(t('To finish enabling JiaThis Share Button in your nodes, visit the <a href="@settings">settings</a> page. And remember to check the <a href="@perm">permissions</a> to view the button.', array('@settings' => \Drupal::url('jiathis.share_button'), '@perm' => \Drupal::url('user.admin_permissions', array('fragment' => 'module-jiathis')))));
   }
 }
 
@@ -19,11 +19,11 @@ function jiathis_enable() {
  * Implements hook_uninstall().
  */
 function jiathis_uninstall() {
-  variable_del('jiathis_node_types');
-  variable_del('jiathis_node_location');
-  variable_del('jiathis_weight');
-  variable_del('jiathis_appkey');
-  variable_del('jiathis_showonteasers');
-	variable_del('jiathis_block_button_settings');
-  variable_del('jiathis_button_settings');
+  // variable_del('jiathis_appkey');
+  // variable_del('jiathis_showonteasers');
+  \Drupal::configFactory()->getEditable('jiathis.page.node_types')->delete();
+  \Drupal::configFactory()->getEditable('jiathis.page.node_location')->delete();
+  \Drupal::configFactory()->getEditable('jiathis.page.weight')->delete();
+  \Drupal::configFactory()->getEditable('jiathis.page.button_settings')->delete();
+  \Drupal::configFactory()->getEditable('jiathis.block.button_settings')->delete();
 }
